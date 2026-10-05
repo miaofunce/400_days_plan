@@ -38,6 +38,35 @@ int insertNode(struct Node *head, int pos,int val){
 	
 }
 
+int deleteNode(struct Node *head,int pos){
+	if(pos<2){
+		printf("位置不合法");
+		return 0;
+	}
+	printf("%d",pos);
+	
+	struct Node *p = head;
+	
+	int i = 1;
+	while(p != NULL && i < pos-1){
+		printf("eeee%d\n",p->data);
+		p = p->next;
+		i++;
+		printf("sssssss%d\n",p->data);
+	}
+	struct Node *q = p->next;
+	if(p == NULL){
+		printf("超出链表范围");
+		return 0;
+	}
+
+	p->next = q->next;
+	
+	free(q);
+	
+	return 1;
+}
+
 int main(){
 	struct Node *head = (struct Node *)malloc(sizeof (struct Node));
 	struct Node *second = (struct Node *)malloc(sizeof (struct Node));
@@ -46,7 +75,6 @@ int main(){
 	
 	head ->data = 10;
 	second ->data = 20;
-	
 	third ->data =30;
 	
 	head->next = second;
@@ -80,6 +108,20 @@ int main(){
 	}else{
 		printf("插入失败\n");
 	}
+
+	int result1 = deleteNode(head,3);
+	if(result1 == 1){
+		printf("删除成功!新链表为:\n");
+		struct Node *q = head;
+		while(q != NULL){
+			printf("%d ->",q->data);
+			q = q->next;
+		}
+		printf("NULL\n");
+	}else{
+		printf("删除失败\n");
+	}
+	
 	free(head);
 	free(second);
 	free(third);
