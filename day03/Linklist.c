@@ -33,35 +33,33 @@ int insertNode(struct Node *head, int pos,int val){
 	newNode ->next = p ->next;
 	p ->next = newNode;
 	return 1;
-	
-	
-	
 }
 
+/* 2026-10-08 修复:
+   原版先执行 q = p->next 再判断 p == NULL,
+   pos 超出链表范围时会空指针崩溃;
+   现改为先判空再解引用,并清除了调试输出。 */
 int deleteNode(struct Node *head,int pos){
 	if(pos<2){
-		printf("位置不合法");
+		printf("位置不合法\n");
 		return 0;
 	}
-	printf("%d",pos);
-	
+
 	struct Node *p = head;
 	
 	int i = 1;
 	while(p != NULL && i < pos-1){
-		printf("eeee%d\n",p->data);
 		p = p->next;
 		i++;
-		printf("sssssss%d\n",p->data);
 	}
-	struct Node *q = p->next;
-	if(p == NULL){
-		printf("超出链表范围");
+
+	if(p == NULL || p->next == NULL){
+		printf("超出链表范围\n");
 		return 0;
 	}
 
+	struct Node *q = p->next;
 	p->next = q->next;
-	
 	free(q);
 	
 	return 1;
@@ -128,5 +126,3 @@ int main(){
 	
 	return 0;
 }
-
-
