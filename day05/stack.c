@@ -15,7 +15,7 @@ void initStack(struct Stack *s){
 
 int Push(struct Stack *s,int val){
 	if(s->top == MaxSize-1){
-		printf("栈满");
+		printf("栈满\n");
 		return 0;
 	};
 	s->top++;
@@ -41,12 +41,12 @@ int main(){
 	Push(&s,20);
 	Push(&s,30);
 	
-	while(s.top != -1){
-		printf("%d\n",s.data[s.top]);
-		s.top--;
-	}
-	return 1;
 	
-	printf("开始出栈操作\n");
+	printf("-------开始出栈操作-------\n");
+	int val;
+	while(Pop(&s,&val)==1){
+		printf("%d\n",val);
+	};
+	return 0;
 	
 }
